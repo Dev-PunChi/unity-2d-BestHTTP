@@ -19,11 +19,17 @@ public class HttpEx
         Request?.Send();
     }
 
+    public void SendToRawData(string data)
+    {
+        if (Request == null) return;
+        Request.RawData = Encoding.UTF8.GetBytes(data);
+        Request.Send();
+    }
+    
     public void SendToJsonData<T>(T data)
     {
         if (Request == null) return;
-        var jsonData = JsonConvert.SerializeObject(data);
-        Request.RawData = Encoding.UTF8.GetBytes(jsonData);
+        Request.RawData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data));
         Request.SetHeader("Content-Type", "application/json; charset=UTF-8");
         Request.Send();
     }
@@ -70,7 +76,6 @@ public class HttpEx
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        if (Response != null)
-            Response(response);
+        Response?.Invoke(response);
     }
 }
