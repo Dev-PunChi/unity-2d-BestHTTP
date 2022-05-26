@@ -11,6 +11,14 @@ public class HttpController : MonoBehaviour
     void Start()
     {
         ApiCallPostState();
+        ApiCallGetState();
+    }
+
+    private void ApiCallGetState()
+    {
+        var http = new HttpEx("http://127.0.0.1:5000/api/state");
+        http.Response += (s) => { Debug.Log($"Controller Message {s.DataAsText}");};
+        http.Send();
     }
 
     private void ApiCallPostState()
