@@ -12,6 +12,17 @@ public class HttpController : MonoBehaviour
     {
         ApiCallPostState();
         ApiCallGetState();
+        ApiCallDeleteState();
+    }
+
+    private void ApiCallDeleteState()
+    {
+        var http = new HttpEx("http://127.0.0.1:5000/api/state", HTTPMethods.Delete);
+        var data = new Dictionary<string, object>
+        {
+            {"idt_state", "1"},
+        };
+        http.SendToJsonData(data);
     }
 
     private void ApiCallGetState()
@@ -30,7 +41,6 @@ public class HttpController : MonoBehaviour
             {"date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")},
             {"state", 4}
         };
-        http.Response += (s) => { Debug.Log($"Controller Message {s.DataAsText}");};
         http.SendToJsonData(data);
     }
 }
