@@ -12,7 +12,13 @@ public class HttpController : MonoBehaviour
     {
         ApiCallPostState();
         ApiCallGetState();
+        ApiCallPutState();
         ApiCallDeleteState();
+    }
+
+    private void ApiCallPutState()
+    {
+        
     }
 
     private void ApiCallDeleteState()
@@ -22,7 +28,7 @@ public class HttpController : MonoBehaviour
         {
             {"idt_state", "1"},
         };
-        http.SendToJsonData(data);
+        http.SendToJsonData(data); 
     }
 
     private void ApiCallGetState()
