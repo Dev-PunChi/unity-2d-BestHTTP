@@ -18,7 +18,14 @@ public class HttpController : MonoBehaviour
 
     private void ApiCallPutState()
     {
-        
+        var http = new HttpEx("http://127.0.0.1:5000/api/state", HTTPMethods.Put);
+        var data = new Dictionary<string, object>
+        {
+            {"idt_state", "1"},
+            {"date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")},
+            {"state", 4}
+        };
+        http.SendToJsonData(data);
     }
 
     private void ApiCallDeleteState()
